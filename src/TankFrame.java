@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -15,13 +17,29 @@ public class TankFrame  extends Frame {
                 System.exit(0);
             }
         });
+
+        addKeyListener(new MyKeyListener());
     }
 
     @Override
     public void paint(Graphics g) {
         System.out.println("paint");
         g.drawRect(x, y,100,100);
-        x += 5;
-        y += 5;
+    }
+
+    private class MyKeyListener extends KeyAdapter {
+        @Override
+        public void keyPressed(KeyEvent e) {
+            super.keyPressed(e);
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            if (e.getKeyChar() == 'd') {
+                x += 5;
+                y += 5;
+                repaint();
+            }
+        }
     }
 }
